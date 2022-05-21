@@ -1,72 +1,74 @@
 "use strict";
 
-const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
+let star = '';
 
-const personalMovieDB = {
-    coutn: numberOfFilms,
-    movies: {},
-    actors: {},
-    genres: [],
-    privat: false
-};
-
-const a = prompt('Один из последних просмотренных фильмов', 'Сумерки'),
-      b = prompt('На сколько оцените его?', '-100500'),
-      c = prompt('Один из последних просмотренных фильмов', 'Сумерки'),
-      d = prompt('На сколько оцените его?', '-100500');
-
-personalMovieDB.movies[a] = b;
-personalMovieDB.movies[c] = d;
-
-
-
-console.log(personalMovieDB);
-
-
-
-console.log( NaN || 2 || undefined ); //2
- 
-console.log( NaN && 2 && undefined ); //nan
- 
-console.log( 1 && 2 && 3 ); // 3
- 
-console.log( !1 && 2 || !3 ); //false
- 
-console.log( 25 || null && !3 ); //25
- 
-console.log( NaN || null || !3 || undefined || 5); //5
- 
-console.log( NaN || null && !3 && undefined || 5); //5
- 
-console.log( 5 === 5 && 3 > 1 || 5); //true
-
-
-const hamburger = 3;
-const fries = 3;
-const cola = 0;
-const nuggets = 2;
- 
-if (hamburger === 3 && cola || fries === 3 && nuggets) {
-   console.log('Done!')
+for (let i = 0; i <= 6; i++) {
+    star = star + '*';
+    console.log(star);
 }
 
-let hamburger;
-const fries = NaN;
-const cola = 0;
-const nuggets = 2;
- 
-if (hamburger || cola || fries === 3 || nuggets) {
-   console.log('Done!')
+
+let result = '';
+const lenght = 10;
+
+for (let i = 1; i < lenght; i++) {
+
+    for (let j = 0; j < i; j++) {
+        result += "*";
+    }
+
+    result += '\n';
 }
 
-let hamburger;
-const fries = NaN;
-const cola = 0;
-const nuggets = 2;
- 
-if (hamburger && cola || fries === 3 && nuggets) {
-   console.log('Done!')
-} else console.log('error');
+console.log(result);
 
 
 
+first: for (let i = 0; i < 3; i++) {
+    console.log(`First level: ${i}`);
+    for (let j = 0; j <= 3; j++) {
+        console.log(`Second level: ${j}`);
+        if (j === 2) continue first;
+        for (let k = 0; k < 1; k++) {
+            console.log(`Third level: ${k}`);
+        }
+    }
+}
+
+
+for ( let i = 5; i <= 10; i++) {
+    console.log(i);
+}
+
+for ( let i = 20; i >= 10; i--) {
+    console.log(i);
+    if (i === 13) break;
+}
+
+for (let i = 1; i <= 10; i++ ) {
+    if (i % 2 === 0) console.log(i);
+}
+
+for (let i = 2; i <= 16; i++) {
+    if (i % 2 === 0) {
+        continue;
+    } else {
+        console.log(i);
+    }
+}
+
+let k = 0;
+while (k < 2) {
+    // if (i % 2 === 0) {
+    //     continue;
+    // } else {
+    //     console.log(i);
+    // }
+    k++;
+}
+
+let i = 0;
+while (i < 3) { // выводит 0, затем 1, затем 2
+  console.log( i );
+  i++;
+}
