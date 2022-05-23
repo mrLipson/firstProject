@@ -1,11 +1,26 @@
 "use strict";
 
-// Значения массива менять нельзя, тут он проверяется автоматически именно на эти значения
-const arr = [3, 5, 8, 16, 20, 23, 50];
-const result = [];
+const lines = 5;
+let result = '';
 
-for (let i = 0; i < arr.length; i++) {
-    result[i] = arr[i];
+for (let i = 0; i <= lines; i++) {
+    if (i <= lines) {
+        for (let j = i; j <= lines; j++) {
+            result += ' ';
+            if (j == lines) {
+                for (let k = 0; k <= i; k++) {
+                    result += '*';
+                    if (k == i) {
+                        for (let m = 0; m < k; m++) {
+                            result += '*';
+                        }
+                    }
+                } 
+            }
+        }
+    }
+    result += '\n';
 }
 
 console.log(result);
+
