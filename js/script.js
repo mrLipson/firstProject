@@ -1,42 +1,54 @@
 "use strict";
 
-const lines = 5;
-let result = '';
+const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
 
-for (let i = 0; i <= lines; i++) {
-    if (i <= lines) {
-        for (let j = i; j <= lines; j++) {
-            if (j == lines) {
-                for (let k = 0; k <= i; k++) {
-                    result += '*';
-                    if (k == i) {
-                        for (let m = 0; m < k; m++) {
-                            result += '*';
-                        }
-                    }
-                } 
-            } else {
-                result += ' ';
-            }
-        }
-    }
-    result += '\n';
+const personalMovieDB = {
+    count: numberOfFilms,
+    movies: {},
+    actors: {},
+    genres: [],
+    privat: false
+};
+
+// for (let i = 0; i < numberOfFilms; i++) {
+//     const a = prompt('Один из последних просмотренных фильмов', 'Сумерки'),
+//           b = prompt('На сколько оцените его?', '-100500');
+    
+//         if (a != null && b != null && a != '' && b != '' && a.length < 50 && b.length < 50) {
+//             personalMovieDB.movies[a] = b;
+//             console.log('Done');
+//         } else {
+//             console.log('Error');
+//             i--;
+//         }          
+// }
+
+
+// let i = 0;
+// while (i < numberOfFilms) {
+//     const a = prompt('Один из последних просмотренных фильмов', 'Сумерки'),
+//           b = prompt('На сколько оцените его?', '-100500');
+//     if (a != null && b != null && a != '' && b != '' && a.length < 50 && b.length < 50) {
+//         personalMovieDB.movies[a] = b;
+//         i++;
+//         console.log('Done');
+//     } else {
+//         console.log('Error');
+//     }      
+// }
+
+
+
+
+if (personalMovieDB.count < 10) {
+    alert("Просмотрено давольно мало фильмов");
+} else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
+    alert("Вы классический зритель");
+} else if (personalMovieDB.count >= 30){
+    alert("Вы киноман");
+} else {
+    alert("Произошла ошибка");
 }
 
-console.log(result);
+console.log(personalMovieDB);
 
-
-const lines = 5;
-let result = '';
-
-for (let i = 0; i <= lines; i++) {
-    for (let j = 0; j < lines - i; j++) {
-        result += " ";
-    }
-    for (let j = 0; j < 2 * i + 1; j++) {
-        result += "*";
-    }
-    result += "\n";
-}
-
-console.log(result)
