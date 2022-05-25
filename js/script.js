@@ -1,69 +1,51 @@
 "use strict";
 
-let numberOfFilms;
-
-function start() {
-    numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
-    while (numberOfFilms == '' || numberOfFilms == null || isNaN(numberOfFilms)) {
-        numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
+// Место для первой задачи
+function calculateVolumeAndArea(a) {
+    if (typeof(a) === 'string' || a <= 0 || a == null || isNaN(a) || !Number.isInteger(a)) {
+        return "При вычислении произошла ошибка";
+    } else {
+        let vCube = a * a * a,
+              sCube = 6 * a * a;
+        return `Объем куба: ${vCube}, площадь всей поверхности: ${sCube}`;
     }
+
 }
-start();
 
-const personalMovieDB = {
-    count: numberOfFilms,
-    movies: {},
-    actors: {},
-    genres: [],
-    privat: false
-};
+calculateVolumeAndArea(5);
 
-function rememberMyFilms () {
-    for (let i = 0; i < 2; i++) {
-        const a = prompt('Один из последних просмотренных фильмов', 'Сумерки'),
-              b = prompt('На сколько оцените его?', '-100500');
+// Место для второй задачи
+function getCoupeNumber(n) {
+  const  coupeNumber = {
+            1: [1, 2, 3, 4],
+            2: [5, 6, 7, 8],
+            3: [9, 10, 11, 12],
+            4: [13, 14, 15, 16],
+            5: [17, 18, 19, 20],
+            6: [21, 22, 23, 24],
+            7: [25, 26, 27, 28],
+            8: [29, 30, 31, 32],
+            9: [33, 34, 35, 36]
+         };
+
+    if (typeof(n) === 'string' || !Number.isInteger(n) || n < 0) {
+        return "Ошибка. Проверьте правильность введенного номера места";
+    }  
     
-        if (a != null && b != null && a != '' && b != '' && a.length < 50 && b.length < 50) {
-            personalMovieDB.movies[a] = b;
-            console.log('Done');
-        } else {
-            console.log('Error');
-            i--;
+    if (n > 36 || n === 0) {
+        return "Таких мест в вагоне не существует";
+    } 
+    
+    for (let i = 1; i <= 9; i++) {
+        for(let j = 0; j < 4; j++) {
+            if (coupeNumber[i][j] == n) {
+                console.log(i);
+                return i;
+            } 
         }
     }
+      
 }
+getCoupeNumber(37);
 
-rememberMyFilms();
 
-
-function detectPersonalLevel() {
-    if (personalMovieDB.count < 10) {
-        console.log("Просмотрено довольно мало фильмов");
-    } else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
-        console.log("Вы классический зритель");
-    } else if (personalMovieDB.count >= 30) {
-        console.log("Вы киноман");
-    } else {
-        console.log("Произошла ошибка");
-    }
-}
-
-detectPersonalLevel();
-
-function showMyDB() {
-    if (personalMovieDB.privat == false) {
-        //console.log(personalMovieDB);
-        console.log('eeeeeee Booooooooyyyyyyyy')
-    }
-}
-
-showMyDB();
-
-function writeYourGenres() {
-    for (let i = 1; i <= 3; i++) {
-        personalMovieDB.genres[i - 1] = prompt(`Ваш любимый жанр под номером ${i}`, 'Ужасы');
-    }
-}
-
-writeYourGenres();
- 
