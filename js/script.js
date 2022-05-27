@@ -89,20 +89,53 @@ console.log(getTimeFromMinutes(20));
 
 // Место для второй задачи
 function findMaxNumber(a, b, c, d) {
-    if (typeof (a+b+c+d) !== 'number') {
+    if (typeof a !== 'number' ||
+        typeof b !== 'number' ||
+        typeof c !== 'number' ||
+        typeof d !== 'number' ) {
         return 0;
-    } 
-    if (a)
-
-    if (a > b && a > c && a > d) {
+    } else if (a > b && a > c && a > d) {
         return a;
-    } else if (b > c && b > d) {
-        return b;
-    } else if (c > d) {
-        return c;
-    } else {
-        return d;
-    }
+        } else if (b > c && b > d) {
+            return b;
+        } else if (c > d) {
+            return c;
+        } else {
+            return d;
+        }
 }
 
-console.log(findMaxNumber(1, 5, 89));
+console.log(findMaxNumber(1, 5, 89, 11));
+
+
+
+
+
+function fib(num) {
+    if (typeof(num) !== 'number' || num <= 0 || !Number.isInteger(num)) {
+        return "";
+    }
+
+    let result = '';     //0 1 1 2 3 5 8 13
+    let first = 0;       //1 1 2 3 5 8 13 21
+    let second = 1;      //1 2 3 5 8 13 21 24
+
+    for (let i = 0; i < num; i++) {
+        if (i + 1 === num) {
+            result += `${first}`;
+            // Без пробела в конце
+        } else {
+            result += `${first} `;
+        }
+
+        let third = first + second;
+        first = second;
+        second = third;
+    }
+
+    return result;
+}
+
+console.log(fib(8));
+
+
