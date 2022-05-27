@@ -1,51 +1,108 @@
 "use strict";
 
 // Место для первой задачи
-function calculateVolumeAndArea(a) {
-    if (typeof(a) === 'string' || a <= 0 || a == null || isNaN(a) || !Number.isInteger(a)) {
-        return "При вычислении произошла ошибка";
-    } else {
-        let vCube = a * a * a,
-              sCube = 6 * a * a;
-        return `Объем куба: ${vCube}, площадь всей поверхности: ${sCube}`;
-    }
 
-}
-
-calculateVolumeAndArea(5);
-
-// Место для второй задачи
-function getCoupeNumber(n) {
-  const  coupeNumber = {
-            1: [1, 2, 3, 4],
-            2: [5, 6, 7, 8],
-            3: [9, 10, 11, 12],
-            4: [13, 14, 15, 16],
-            5: [17, 18, 19, 20],
-            6: [21, 22, 23, 24],
-            7: [25, 26, 27, 28],
-            8: [29, 30, 31, 32],
-            9: [33, 34, 35, 36]
-         };
-
-    if (typeof(n) === 'string' || !Number.isInteger(n) || n < 0) {
-        return "Ошибка. Проверьте правильность введенного номера места";
-    }  
-    
-    if (n > 36 || n === 0) {
-        return "Таких мест в вагоне не существует";
+function getTimeFromMinutes(writeNumber) {
+    if (writeNumber < 0 || !Number.isInteger(writeNumber) || typeof writeNumber === 'snring') {
+        return 'Ошибка, проверьте данные';
     } 
+        
+    let hours = ~~(writeNumber/60),
+        minutes = writeNumber % 60;
+    let hs = hours % 10,
+        min = minutes % 10;
     
-    for (let i = 1; i <= 9; i++) {
-        for(let j = 0; j < 4; j++) {
-            if (coupeNumber[i][j] == n) {
-                console.log(i);
-                return i;
-            } 
+    const transHour = {
+            0: 'часов',
+            1: 'час',
+            2: 'часа',
+            3: 'часа',
+            4: 'часа',
+            5: 'часов',
+            6: 'часов',
+            7: 'часов',
+            8: 'часов',
+            9: 'часов'
+    };
+
+    const transMin = {
+        0: 'минут',
+        1: 'минута',
+        2: 'минуты',
+        3: 'минуты',
+        4: 'минуты',
+        5: 'минут',
+        6: 'минут',
+        7: 'минут',
+        8: 'минут',
+        9: 'минут'
+    };
+
+    function translateHours() {
+        for (let i = 0; i <= hs; i++) {
+            if (hs == i) {
+                hs = transHour[i];
+                return hs;
+            }
         }
     }
-      
+
+    function translateMinutes() {
+        for (let i = 0; i <= min; i++) {
+            if (min == i) {
+                min = transMin[i];
+                return min;
+            }
+        }
+    }
+
+    
+    if (hours < 10) {
+        translateHours();
+    } else if (hours >= 5 && hours <= 20) {
+        hs = 'часов';
+    } else if (hours > 20 && hours <= 100) {
+        translateHours();
+    }
+
+    if (minutes < 10) {
+        translateMinutes();
+    } else if (minutes >= 5 && minutes <= 20) {
+        min = 'минут';
+    } else if (minutes > 20 && minutes <= 59) {
+        translateMinutes();
+    }
+        
+    return `Это ${hours} ${hs} и ${minutes} ${min}`;   
 }
-getCoupeNumber(37);
+
+// 1 час
+// 1 минута
+// 2 3 4 часа
+// 2 3 4 минуты
+// 0 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 часов
+// 0 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 минут
+
+console.log(getTimeFromMinutes(20));
 
 
+
+// Место для второй задачи
+function findMaxNumber(a, b, c, d) {
+    if (typeof (a+b+c+d) !== 'number') {
+        return 0;
+    } 
+    if (a)
+
+    if (a > b && a > c && a > d) {
+        return a;
+    } else if (b > c && b > d) {
+        return b;
+    } else if (c > d) {
+        return c;
+    } else {
+        return d;
+    }
+}
+
+console.log(findMaxNumber(1, 5, 89));
