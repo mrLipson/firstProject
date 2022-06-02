@@ -1,141 +1,73 @@
 "use strict";
 
-// Место для первой задачи
 
-function getTimeFromMinutes(writeNumber) {
-    if (writeNumber < 0 || !Number.isInteger(writeNumber) || typeof writeNumber === 'snring') {
-        return 'Ошибка, проверьте данные';
-    } 
-        
-    let hours = ~~(writeNumber/60),
-        minutes = writeNumber % 60;
-    let hs = hours % 10,
-        min = minutes % 10;
+
+const personalMovieDB = {
+    count: 0,
+    movies: {},
+    actors: {},
+    genres: [],
+    privat: false,
+    start: function() {
+        personalMovieDB.count = +prompt('Сколько фильмов вы уже посмотрели?', '');
+        while (personalMovieDB.count == '' || personalMovieDB.count == null || isNaN(personalMovieDB.count)) {
+            personalMovieDB.count = +prompt('Сколько фильмов вы уже посмотрели?', '');
+        }
+    },
+    rememberMyFilms: function() {
+        for (let i = 0; i < 2; i++) {
+            const a = prompt('Один из последних просмотренных фильмов', 'Сумерки'),
+                  b = prompt('На сколько оцените его?', '-100500');
     
-    const transHour = {
-            0: 'часов',
-            1: 'час',
-            2: 'часа',
-            3: 'часа',
-            4: 'часа',
-            5: 'часов',
-            6: 'часов',
-            7: 'часов',
-            8: 'часов',
-            9: 'часов'
-    };
-
-    const transMin = {
-        0: 'минут',
-        1: 'минута',
-        2: 'минуты',
-        3: 'минуты',
-        4: 'минуты',
-        5: 'минут',
-        6: 'минут',
-        7: 'минут',
-        8: 'минут',
-        9: 'минут'
-    };
-
-    function translateHours() {
-        for (let i = 0; i <= hs; i++) {
-            if (hs == i) {
-                hs = transHour[i];
-                return hs;
+            if (a != null && b != null && a != '' && b != '' && a.length < 50 && b.length < 50) {
+                personalMovieDB.movies[a] = b;
+                console.log('Done');
+            } else {
+                console.log('Error');
+                i--;
             }
         }
-    }
-
-    function translateMinutes() {
-        for (let i = 0; i <= min; i++) {
-            if (min == i) {
-                min = transMin[i];
-                return min;
+    },
+    detectPersonalLevel: function() {
+        if (personalMovieDB.count < 10) {
+            console.log("Просмотрено довольно мало фильмов");
+        } else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
+            console.log("Вы классический зритель");
+        } else if (personalMovieDB.count >= 30) {
+            console.log("Вы киноман");
+        } else {
+            console.log("Произошла ошибка");
+        }
+    },
+    showMyDB: function(hidden) {
+        if (!hidden) {
+            console.log(personalMovieDB);
+        }
+    },
+    writeYourGenres: function() {
+        for (let i = 1; i <= 3; i++) {
+            let genre = prompt(`Ваш любимый жанр под номером ${i}`, 'Ужасы');
+            if (genre === '' || genre == null) {
+                console.log("Вы ввели некорректные данные или не ввели их вообще!");
+                i--;
+            } else {
+                personalMovieDB.genres[i - 1] = genre;
             }
         }
-    }
-
-    
-    if (hours < 10) {
-        translateHours();
-    } else if (hours >= 5 && hours <= 20) {
-        hs = 'часов';
-    } else if (hours > 20 && hours <= 100) {
-        translateHours();
-    }
-
-    if (minutes < 10) {
-        translateMinutes();
-    } else if (minutes >= 5 && minutes <= 20) {
-        min = 'минут';
-    } else if (minutes > 20 && minutes <= 59) {
-        translateMinutes();
-    }
-        
-    return `Это ${hours} ${hs} и ${minutes} ${min}`;   
-}
-
-// 1 час
-// 1 минута
-// 2 3 4 часа
-// 2 3 4 минуты
-// 0 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 часов
-// 0 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 минут
-
-console.log(getTimeFromMinutes(20));
-
-
-
-// Место для второй задачи
-function findMaxNumber(a, b, c, d) {
-    if (typeof a !== 'number' ||
-        typeof b !== 'number' ||
-        typeof c !== 'number' ||
-        typeof d !== 'number' ) {
-        return 0;
-    } else if (a > b && a > c && a > d) {
-        return a;
-        } else if (b > c && b > d) {
-            return b;
-        } else if (c > d) {
-            return c;
+        personalMovieDB.genres.forEach((item, index) => {
+            console.log(`Любимый жанр #${index + 1} - это ${item}`);
+        });
+    },
+    toggleVisibleMyDB: function() {
+        if (personalMovieDB.privat) {
+            personalMovieDB.privat = false;
         } else {
-            return d;
+            personalMovieDB.privat = true;
         }
-}
-
-console.log(findMaxNumber(1, 5, 89, 11));
-
-
-
-
-
-function fib(num) {
-    if (typeof(num) !== 'number' || num <= 0 || !Number.isInteger(num)) {
-        return "";
     }
+};
 
-    let result = '';     //0 1 1 2 3 5 8 13
-    let first = 0;       //1 1 2 3 5 8 13 21
-    let second = 1;      //1 2 3 5 8 13 21 24
 
-    for (let i = 0; i < num; i++) {
-        if (i + 1 === num) {
-            result += `${first}`;
-            // Без пробела в конце
-        } else {
-            result += `${first} `;
-        }
 
-        let third = first + second;
-        first = second;
-        second = third;
-    }
-
-    return result;
-}
-
-console.log(fib(8));
-
+ 
 
