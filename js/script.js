@@ -1,54 +1,57 @@
 "use strict";
 
-const shoppingMallData = {
-    shops: [
-        {
-            width: 10, 
-            length: 5
-        },
-        {
-            width: 15,
-            length: 7  
-        },
-        {
-            width: 20,  
-            length: 5
-        },
-        {
-            width: 8,   
-            length: 10
-        }
-    ],
-    height: 5,
-    moneyPer1m3: 30,
-    budget: 50000
-};
+const students = ['Peter', 'Andrew', 'Ann', 'Mark', 'Josh', 'Sandra', 'Cris', 'Bernard', 'Takesi', 'Sam'];
 
-function isBudgetEnough(data) {
-    let shopsS = 0;
-    let mollV;
-    let s = 1;
-    for (let i = 0; i < data.shops.length; i++) {
-        Object.values(data.shops[i]).forEach((item) => {
-            s = s * item;
-        });
-        shopsS += s;
-        s = 1;
+function sortStudentsByGroups(arr) {
+    let studentClone = [...arr].sort();
+    let newStudents = [];
+    let arrLastStudents = [];
+    let lastStudents = "Оставшиеся студенты: ";
+    let i = 0,
+        j = 3,
+        k = 0;
+    while (j <= 9) {
+        newStudents[k] = studentClone.slice(i, j);
+        i = j;
+        j += 3;
+        k++;
     }
-
-    mollV = shopsS * data.height;
-
-    if (data.budget < mollV * data.moneyPer1m3) {
-        return "Бюджета недостаточно";
-    } else {
-        return "Бюджета достаточно";
+    if (studentClone.length == 9) {
+        lastStudents += '-';
+        newStudents.splice(4, 0, lastStudents);
+    } else if (studentClone.length > 9) {
+        arrLastStudents = studentClone.slice(9, studentClone.length);
+        lastStudents += arrLastStudents.join(", ");
+        newStudents.splice(4, 0, lastStudents);
     }
-    
+    return newStudents;
 }
 
-console.log(isBudgetEnough(shoppingMallData));
+console.log(sortStudentsByGroups(students));
 
 
+  
+const students = ['Peter', 'Andrew', 'Ann', 'Mark', 'Josh', 'Sandra', 'Cris', 'Bernard', 'Takesi', 'Sam'];
+
+function sortStudentsByGroups(arr) {
+    arr.sort();
+    const a = [], b = [], c = [], rest = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        if (i < 3) {
+            a.push(arr[i]);
+        } else if (i < 6) {
+            b.push(arr[i]);
+        } else if (i < 9) {
+            c.push(arr[i]);
+        } else {
+            rest.push(arr[i]);
+        }
+    }
+    return [a,b,c, `Оставшиеся студенты: ${rest.length === 0 ? '-' : rest.join(', ')}`]
+}
+
+sortStudentsByGroups(students);
 
 
 
